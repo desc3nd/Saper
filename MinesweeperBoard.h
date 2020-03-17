@@ -20,7 +20,7 @@ class MinesweeperBoard
     int width;
     int height;
     GameMode  mode;
-    int bomb_amount;
+    int bomb;
     GameState status_gry;
     int mines_left;
     int number_of_player_action;

@@ -12,9 +12,9 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
    this->width=height;
    this->height=width;
    this->mode=mode;
-   this->bomb_amount=0;
+   this->bomb=bomb;
    this->status_gry=RUNNING;
-   this->mines_left=bomb_amount;
+   this->mines_left=bomb;
    this->number_of_player_action=0;
     //zerowanie mapy
     for(int row=0;row<height;row++)
@@ -46,7 +46,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
     if (mode==EASY)
     {
         my_percentage=width*height*(0.1);
-        for(int bomb=0;bomb<my_percentage;)
+        for(bomb=0;bomb<my_percentage;)
         {
             int row=rand()%width;
             int col=rand()%height;
@@ -54,14 +54,14 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
             {
                 board[row][col].hasMine = true;
                 bomb++;
-                bomb_amount++;
+
             }
         }
     }
     if (mode==NORMAL)
     {
         my_percentage=width*height*(0.2);
-        for(int bomb=0;bomb<my_percentage;)
+        for( bomb=0;bomb<my_percentage;)
         {
             int row=rand()%width;
             int col=rand()%height;
@@ -69,14 +69,14 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
             {
                 board[row][col].hasMine = true;
                 bomb++;
-                bomb_amount++;
+
             }
         }
     }
     if (mode==HARD)
     {
         my_percentage=width*height*(0.3);
-        for(int bomb=0;bomb<my_percentage+1;)//BEZ JEDNYNKI BOMB JEST ZA MALO KIEDY W INNYCH FUNCKAJCH DZIALA /
+        for( bomb=0;bomb<my_percentage+1;)//BEZ JEDNYNKI BOMB JEST ZA MALO KIEDY W INNYCH FUNCKAJCH DZIALA /
         {
             int row=rand()%width;
             int col=rand()%height;
@@ -84,7 +84,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
             {
                 board[row][col].hasMine = true;
                 bomb++;
-                bomb_amount++;
+
             }
         }
     }
@@ -133,33 +133,32 @@ int MinesweeperBoard::getBoardWidth() const
 
 int MinesweeperBoard::getMineCount() const
 {
-    return bomb_amount;
+    return bomb;    
 }
-
 int MinesweeperBoard::countMines(int x, int y) const
 {
     if(!board[x][y].isRevealed)
         return -1;
-    if(x>width || y>height || x<0 || y<0)
+    if(x>height || y>width || x<0 || y<0)
         return -1;
     else
     {
         int number_of_bombs = 0;
-        if(board[x+1][y].hasMine && x+1<=width)
+        if(x+1<=height && board[x+1][y].hasMine)
             number_of_bombs++;
-        if(board[x-1][y].hasMine && x-1>=width)
+        if( x-1>=height && board[x-1][y].hasMine )
             number_of_bombs++;
-        if(board[x][y+1].hasMine && y+1<=height)
+        if(y+1<=width && board[x][y+1].hasMine)
             number_of_bombs++;
-        if(board[x][y-1].hasMine && y-1>=height)
+        if(y-1>=width && board[x][y-1].hasMine )
             number_of_bombs++;
-        if(board[x+1][y+1].hasMine && x+1<=width && y+1<=height)
+        if(x+1<=height && y+1<=width && board[x+1][y+1].hasMine)
             number_of_bombs++;
-        if(board[x-1][y-1].hasMine && x-1>=width && y-1>=height)
+        if(x-1>=height && y-1>=width && board[x-1][y-1].hasMine)
             number_of_bombs++;
-        if(board[x+1][y-1].hasMine && x+1<=width && y-1>=height)
+        if( x+1<=height && y-1>=width && board[x+1][y-1].hasMine)
             number_of_bombs++;
-        if(board[x-1][y+1].hasMine && x-1>=width && y+1<=height)
+        if(x-1>=height && y+1<=width && board[x-1][y+1].hasMine)
             number_of_bombs++;
         return number_of_bombs;
     }
@@ -199,11 +198,11 @@ void MinesweeperBoard::toggleFlag(int x, int y)
 void MinesweeperBoard::revealField(int x, int y)
 {
     number_of_player_action++;
+    if(x>width || y>height || x<0 || y<0)
+        return;
     if(board[x][y].isRevealed)
         return;
     if(status_gry!=RUNNING)
-        return;
-    if(x>width || y>height || x<0 || y<0)
         return;
     if(board[x][y].hasFlay)
         return;
