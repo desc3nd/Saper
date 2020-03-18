@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
     srand( time( NULL ) );
-    MinesweeperBoard x(10,10,NORMAL);
+    MinesweeperBoard x(10,10,HARD);
     x.Debug_Display();
     cout<<x.getMineCount()<<" ";
     x.toggleFlag(3,4);
