@@ -285,10 +285,5 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
         if(mines_around==8)
             return '8';
     }
-
         abort();
-
 }
-
-
-
