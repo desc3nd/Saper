@@ -26,7 +26,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
             board[row][col].isRevealed=0;
         }
     }
-    int my_percentage=0; //zmienna pomocnicza
+    float my_percentage=0; //zmienna pomocnicza
     //tryby gry
     if(mode==DEBUG)
     {
@@ -76,7 +76,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
     if (mode==HARD)
     {
         my_percentage=width*height*(0.3);
-        for( bomb=0;bomb<my_percentage+1;)//BEZ JEDNYNKI BOMB JEST ZA MALO KIEDY W INNYCH FUNCKAJCH DZIALA /
+        for( bomb=0;bomb<my_percentage;)
         {
             int row=rand()%width;
             int col=rand()%height;
@@ -162,7 +162,8 @@ int MinesweeperBoard::countMines(int x, int y) const
             number_of_bombs++;
         return number_of_bombs;
     }
-}
+    }
+
 
 bool MinesweeperBoard::hasFlag(int x, int y) const
 {
@@ -173,6 +174,8 @@ bool MinesweeperBoard::hasFlag(int x, int y) const
     if(!board[x][y].hasFlay)
         return false;
     if(board[x][y].isRevealed)
+        return false;
+
         return false;
 }
 
@@ -237,6 +240,8 @@ bool MinesweeperBoard::isRevealed(int x, int y) const
 {
     if (board[x][y].isRevealed)
         return true;
+
+        return false;
 }
 
 GameState MinesweeperBoard::getGameState() const
@@ -245,6 +250,7 @@ GameState MinesweeperBoard::getGameState() const
         return FINISHED_LOSS;
     if (status_gry == RUNNING && mines_left== 0)
         return FINISHED_WIN;
+    return RUNNING;
 }
 
 char MinesweeperBoard::getFieldInfo(int x, int y) const
@@ -258,7 +264,6 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
         return '_';
     if(board[x][y].isRevealed && board[x][y].hasMine)
         return 'x';
-
     if(board[x][y].isRevealed && mines_around==0)
         return ' ';
     if(board[x][y].isRevealed && mines_around!=0)
@@ -281,7 +286,7 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
             return '8';
     }
 
-
+        abort();
 
 }
 
