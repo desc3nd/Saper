@@ -30,7 +30,7 @@ public:
 
     void Debug_Display() const;
 
-        int getBoardWidth() const;
+    int getBoardWidth() const;
 
     int getBoardHeight() const;
 
