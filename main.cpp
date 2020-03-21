@@ -5,14 +5,20 @@ using namespace std;
 #include <cstdlib>
 #include <ctime>
 #include "MinesweeperBoard.h"
+#include "MSBoardTextView.h"
 int main()
 {
     srand( time( NULL ) );
     MinesweeperBoard x(10,10,HARD);
-    x.Debug_Display();
-    cout<<x.getMineCount()<<" ";
-    x.toggleFlag(3,4);
-    x.revealField(1,1);
-    cout<<" "<<x.getMineCount()<<" ";
-    cout<<x.countMines(1,1);
+    //x.Debug_Display();
+   // cout<<x.getMineCount()<<" ";
+    //x.toggleFlag(3,4);
+    //x.revealField(1,1);
+    //cout<<" "<<x.getMineCount()<<" ";
+    //cout<<x.countMines(1,1);
+    MSBoardTextView view(x);
+    view.display();
+    x.revealField(3,4);
+    x.revealField(1,2);
+    view.display();
 }

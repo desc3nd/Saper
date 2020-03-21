@@ -286,8 +286,6 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
             return '8';
     }
 
-        abort();
-
 }
 
 
