@@ -24,6 +24,7 @@ class MinesweeperBoard
     GameState status_gry;
     int mines_left;
     int number_of_player_action;
+    void BombOnBoard(float x) ;
 
 public:
     MinesweeperBoard(int height,int width,GameMode mode);
