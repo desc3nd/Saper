@@ -7,6 +7,23 @@ using namespace std;
 
 #include <cstdlib>
 
+
+
+void MinesweeperBoard::BombOnBoard(float x)
+{
+    float my_percentage=width*height*(x);
+    for(bomb=0;bomb<my_percentage;)
+    {
+        int row=rand()%width;
+        int col=rand()%height;
+        if(board[row][col].hasMine==0)
+        {
+            board[row][col].hasMine = true;
+            bomb++;
+
+        }
+    }
+}
 MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
 {
    this->width=height;
@@ -45,53 +62,19 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
     }
     if (mode==EASY)
     {
-        my_percentage=width*height*(0.1);
-        for(bomb=0;bomb<my_percentage;)
-        {
-            int row=rand()%width;
-            int col=rand()%height;
-            if(board[row][col].hasMine==0)
-            {
-                board[row][col].hasMine = true;
-                bomb++;
-
-            }
-        }
+        BombOnBoard(0.1);
     }
     if (mode==NORMAL)
     {
-        my_percentage=width*height*(0.2);
-        for( bomb=0;bomb<my_percentage;)
-        {
-            int row=rand()%width;
-            int col=rand()%height;
-            if(board[row][col].hasMine==0)
-            {
-                board[row][col].hasMine = true;
-                bomb++;
-
-            }
-        }
+       BombOnBoard(0.2);
     }
     if (mode==HARD)
     {
-        my_percentage=width*height*(0.3);
-        for( bomb=0;bomb<my_percentage;)
-        {
-            int row=rand()%width;
-            int col=rand()%height;
-            if(board[row][col].hasMine==0)
-            {
-                board[row][col].hasMine = true;
-                bomb++;
-
-            }
-        }
+       BombOnBoard(0.3);
     }
 }
 
 //funkcje
-
    void  MinesweeperBoard::Debug_Display() const
 {
     for(int row=0;row<height;row++)
@@ -286,7 +269,7 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
             return '8';
     }
 
-        abort();
+
 
 }
 
