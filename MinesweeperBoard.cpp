@@ -103,12 +103,11 @@ int MinesweeperBoard::getMineCount() const
 }
 int MinesweeperBoard::countMines(int x, int y) const
 {
+   if(x>height || y>width || x<0 || y<0)
+        return -1;
     if(!board[x][y].isRevealed)
         return -1;
-    if(x>height || y>width || x<0 || y<0)
-        return -1;
-    else
-    {
+
         int number_of_bombs = 0;
         if(x+1<=height && board[x+1][y].hasMine)
             number_of_bombs++;
@@ -127,16 +126,16 @@ int MinesweeperBoard::countMines(int x, int y) const
         if(x-1>=height && y+1<=width && board[x-1][y+1].hasMine)
             number_of_bombs++;
         return number_of_bombs;
-    }
+
     }
 
 
 bool MinesweeperBoard::hasFlag(int x, int y) const
 {
-    if(board[x][y].hasFlay)
-        return true;
     if(x>width || y>height || x<0 || y<0)
         return false;
+    if(board[x][y].hasFlay)
+        return true;
     if(!board[x][y].hasFlay)
         return false;
     if(board[x][y].isRevealed)
@@ -147,9 +146,9 @@ bool MinesweeperBoard::hasFlag(int x, int y) const
 
 void MinesweeperBoard::toggleFlag(int x, int y)
 {
-    if(board[x][y].isRevealed)
-        return;
     if(x>height || y>width || x<0 || y<0)
+        return;
+    if(board[x][y].isRevealed)
         return;
     if(status_gry==FINISHED_LOSS || status_gry==FINISHED_WIN)
         return;
