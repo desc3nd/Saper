@@ -203,6 +203,9 @@ void MinesweeperBoard::revealField(int x, int y)
 
 bool MinesweeperBoard::isRevealed(int x, int y) const
 {
+    if(x>height || y>width || x<0 || y<0)
+        return false;
+
     if (board[x][y].isRevealed)
         return true;
 
