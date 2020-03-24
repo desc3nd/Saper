@@ -36,4 +36,7 @@ int main() {
     x.toggleFlag(0,0);
     x.toggleFlag(5,10);
     x.toggleFlag(10000,10000);
+    x.isRevealed(0,0);
+    x.isRevealed(5,10);
+    x.isRevealed(10000,10000);
 }
