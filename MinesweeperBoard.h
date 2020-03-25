@@ -10,7 +10,7 @@ enum GameMode  {DEBUG,EASY, NORMAL, HARD };
 enum GameState { RUNNING, FINISHED_WIN, FINISHED_LOSS };
 struct field
 {
-    bool hasFlay;
+    bool hasFlag;
     bool hasMine;
     bool isRevealed;
 };
@@ -25,6 +25,7 @@ class MinesweeperBoard
     int mines_left;
     int number_of_player_action;
     void BombOnBoard(float x) ;
+    bool BeyondSize(int x, int y) const;
 
 public:
     MinesweeperBoard(int height,int width,GameMode mode);

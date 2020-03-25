@@ -9,7 +9,7 @@ using namespace std;
 #include "Array2D.h"
 int main() {
     srand(time(NULL));
-    MinesweeperBoard x(5, 10, DEBUG);
+    MinesweeperBoard x(10, 10, HARD);
     //x.Debug_Display();
     cout << x.getMineCount() << " ";
     //x.toggleFlag(3,4);
