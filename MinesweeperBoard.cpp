@@ -16,6 +16,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
    this->status_gry=RUNNING;
    this->mines_left=bomb;
    this->number_of_player_action=0;
+   covered=width*height;
     //zerowanie mapy
     for(int row=0;row<height;row++)
     {
@@ -126,9 +127,7 @@ int MinesweeperBoard::countMines(int x, int y) const
         if(x-1>=height && y+1<=width && board[x-1][y+1].hasMine)
             number_of_bombs++;
         return number_of_bombs;
-
     }
-
 
 bool MinesweeperBoard::hasFlag(int x, int y) const
 {
@@ -155,17 +154,16 @@ void MinesweeperBoard::toggleFlag(int x, int y)
     if(!board[x][y].hasFlag)
     {
         board[x][y].hasFlag=true;
+        return;
     }
-    if(!board[x][y].hasFlag && board[x][y].hasMine)
+    if(board[x][y].hasFlag)
     {
-        board[x][y].hasFlag=true;
+        board[x][y].hasFlag=false;
     }
-
 }
 
 void MinesweeperBoard::revealField(int x, int y)
 {
-
     if(BeyondSize(x,y)!=true)
         return;
     number_of_player_action++;
@@ -175,9 +173,12 @@ void MinesweeperBoard::revealField(int x, int y)
         return;
     if(board[x][y].hasFlag)
         return;
-
     if(!board[x][y].hasMine && !board[x][y].isRevealed)
+    {
         board[x][y].isRevealed=true;
+        covered--;
+    }
+
     if(board[x][y].hasMine && !board[x][y].isRevealed)
     {
         if(number_of_player_action==1)
@@ -197,8 +198,6 @@ void MinesweeperBoard::revealField(int x, int y)
             board[x][y].isRevealed=true;
             status_gry=FINISHED_LOSS;
         }
-
-
     }
 }
 
@@ -216,7 +215,7 @@ GameState MinesweeperBoard::getGameState() const
 {
     if (status_gry == FINISHED_LOSS)
         return FINISHED_LOSS;
-    if (status_gry == RUNNING && mines_left== 0)
+    if (status_gry == RUNNING && covered==bomb)
         return FINISHED_WIN;
     return RUNNING;
 }
@@ -257,7 +256,6 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
 
 void MinesweeperBoard::BombOnBoard(float percentage)
 {
-
     int NumberOfBombs=width*height*(percentage);
     for(bomb=0;bomb<NumberOfBombs;)
     {
@@ -267,7 +265,6 @@ void MinesweeperBoard::BombOnBoard(float percentage)
         {
             board[row][col].hasMine = true;
             bomb++;
-
         }
     }
 }

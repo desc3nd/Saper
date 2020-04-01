@@ -24,6 +24,7 @@ class MinesweeperBoard
     GameState status_gry;
     int mines_left;
     int number_of_player_action;
+    int covered;
     void BombOnBoard(float x) ;
     bool BeyondSize(int x, int y) const;
 

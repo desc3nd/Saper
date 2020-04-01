@@ -7,6 +7,7 @@ using namespace std;
 #include "MinesweeperBoard.h"
 #include "MSBoardTextView.h"
 #include "Array2D.h"
+#include "MSTextController.h"
 int main() {
     srand(time(NULL));
     MinesweeperBoard x(10, 10, HARD);
@@ -17,7 +18,7 @@ int main() {
     //cout<<" "<<x.getMineCount()<<" ";
     //cout<<x.countMines(1,1);
     MSBoardTextView view(x);
-    view.display();
+   /*view.display();
     x.revealField(3, 4);
     x.revealField(1, 2);
     view.display();
@@ -39,4 +40,7 @@ int main() {
     x.isRevealed(0,0);
     x.isRevealed(5,10);
     x.isRevealed(10000,10000);
+    */
+   MSTextController ctrl(x,view);
+   ctrl.play();
 }
