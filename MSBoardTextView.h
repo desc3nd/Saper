@@ -17,6 +17,7 @@ public:
     explicit MSBoardTextView(MinesweeperBoard &x);
     void display() const;
 
+
 };
 
 
