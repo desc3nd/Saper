@@ -4,23 +4,22 @@
 using namespace std;
 #include<iostream>
 #include "MinesweeperBoard.h"
-
+#include <math.h>
 #include <cstdlib>
 
-MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode)
+MinesweeperBoard::MinesweeperBoard(int height,int width, GameMode mode)
 {
-   this->width=height;
-   this->height=width;
+   this->width=width;
+   this->height=height;
    this->mode=mode;
-   this->bomb=bomb;
    this->status_gry=RUNNING;
-   this->mines_left=bomb;
+
    this->number_of_player_action=0;
    covered=width*height;
     //zerowanie mapy
-    for(int row=0;row<height;row++)
+    for(int row=0; row<height; row++)
     {
-        for(int col=0;col<width;col++)
+        for(int col=0; col<width; col++)
         {
             board[row][col].hasFlag=0;
             board[row][col].hasMine=0;
@@ -112,19 +111,19 @@ int MinesweeperBoard::countMines(int x, int y) const
         int number_of_bombs = 0;
         if(x+1<=height && board[x+1][y].hasMine)
             number_of_bombs++;
-        if( x-1>=height && board[x-1][y].hasMine )
+        if( x-1>=0 && board[x-1][y].hasMine )
             number_of_bombs++;
         if(y+1<=width && board[x][y+1].hasMine)
             number_of_bombs++;
-        if(y-1>=width && board[x][y-1].hasMine )
+        if(y-1>=0 && board[x][y-1].hasMine )
             number_of_bombs++;
-        if(x+1<=height && y+1<=width && board[x+1][y+1].hasMine)
+        if(x+1<=height && y+1<=height && board[x+1][y+1].hasMine)
             number_of_bombs++;
-        if(x-1>=height && y-1>=width && board[x-1][y-1].hasMine)
+        if(x-1>=0 && y-1>=0 && board[x-1][y-1].hasMine)
             number_of_bombs++;
-        if( x+1<=height && y-1>=width && board[x+1][y-1].hasMine)
+        if( x+1<=height && y-1>=0 && board[x+1][y-1].hasMine)
             number_of_bombs++;
-        if(x-1>=height && y+1<=width && board[x-1][y+1].hasMine)
+        if(x-1>=0 && y+1<=width && board[x-1][y+1].hasMine)
             number_of_bombs++;
         return number_of_bombs;
     }
@@ -183,15 +182,16 @@ void MinesweeperBoard::revealField(int x, int y)
     {
         if(number_of_player_action==1)
         {
+            board[x][y].isRevealed=true;
             board[x][y].hasMine=false;
-                int a = rand() % height;
-                int b = rand() % width;
-            while(board[a][b].hasMine)
+                int row = rand() % height;
+                int col = rand() % width;
+            while(board[row][col].hasMine)
             {
-                a=rand()%height;
-                b=rand()%width;
+                row=rand()%height;
+                col=rand()%width;
             }
-            board[a][b].hasMine=true;
+            board[row][col].hasMine=true;
         }
         else
         {
@@ -223,6 +223,7 @@ GameState MinesweeperBoard::getGameState() const
 char MinesweeperBoard::getFieldInfo(int x, int y) const
 {
     int mines_around=countMines(x, y);
+
     if(BeyondSize(x,y)!=true)
         return '#';
     if(!board[x][y].isRevealed && board[x][y].hasFlag)
@@ -252,15 +253,16 @@ char MinesweeperBoard::getFieldInfo(int x, int y) const
         if(mines_around==8)
             return '0' + mines_around;
     }
+    return '.';
 }
 
 void MinesweeperBoard::BombOnBoard(float percentage)
 {
-    int NumberOfBombs=width*height*(percentage);
+    int NumberOfBombs=round(width*height*(percentage)); // round
     for(bomb=0;bomb<NumberOfBombs;)
     {
-        int row=rand()%width;
-        int col=rand()%height;
+        int row=rand()%height;
+        int col=rand()%width;
         if(board[row][col].hasMine==0)
         {
             board[row][col].hasMine = true;
@@ -274,5 +276,4 @@ bool MinesweeperBoard::BeyondSize(int x, int y) const
                 return false;
                 return true;
         }
-
 

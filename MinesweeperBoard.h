@@ -21,15 +21,14 @@ class MinesweeperBoard
     int height;
     GameMode  mode;
     int bomb;
-    int mines_left;
     GameState status_gry;
     int number_of_player_action;
-    int covered;
+    long int covered;
     void BombOnBoard(float x) ;
     bool BeyondSize(int x, int y) const;
 
 public:
-    MinesweeperBoard(int height,int width,GameMode mode);
+    MinesweeperBoard(int height ,int width,GameMode mode);
 
     void Debug_Display() const;
 
