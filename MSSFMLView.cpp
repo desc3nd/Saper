@@ -8,7 +8,6 @@ MSSFMLView::MSSFMLView(MinesweeperBoard &x) : board(x) {
     width = board.getBoardWidth();
     screenX = 1000;
     screenY = 1000;
-    sf::Text eventTxt;
     drawRectangle();
        if (!font.loadFromFile("arial.ttf"))
        {
@@ -51,9 +50,9 @@ void MSSFMLView::drawRectangle() {
             rectangle[i][j].setFillColor(sf::Color::Black);
             rectangle[i][j].setOutlineThickness(1);
             rectangle[i][j].setOutlineColor(sf::Color::White);
-            x=x+screenX/width;
+            x=x+screenX/float(width);
         }
-        y=y+screenY/height;
+        y=y+screenY/float(height);
         x=0;
     }
 }
@@ -86,7 +85,7 @@ void MSSFMLView::rectangleEventRight(int x, int y) {
     }
 }
 
-void MSSFMLView::drawNumberOfBombs(int x, int y, int ix, int iy)
+void MSSFMLView::drawNumberOfBombs(int x, int y, float ix, float iy)
 {
     char literka = board.getFieldInfo(x, y);
     int kodliterki = (int) literka;

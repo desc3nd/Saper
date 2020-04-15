@@ -13,7 +13,6 @@ MSTextController::MSTextController(MinesweeperBoard &x, MSBoardTextView &y) :boa
 
 void MSTextController::play()
 {
-
     cout<<" Witaj,zacznijmy rozgrywke!"<<endl;
    for(int i=0;i<width;i++)
        cout<< " - ";

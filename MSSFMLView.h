@@ -25,7 +25,7 @@ public:
     float getScreenY();
     void rectangleEventLeft(int x,int y);
     void rectangleEventRight(int x,int y);
-    void drawNumberOfBombs(int x, int y, int ix, int iy);
+    void drawNumberOfBombs(int x, int y, float ix, float iy);
 };
 
 

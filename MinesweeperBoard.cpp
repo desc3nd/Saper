@@ -279,8 +279,10 @@ void MinesweeperBoard::BombOnBoard(float percentage)
 }
 bool MinesweeperBoard::BeyondSize(int x, int y) const
         {
-                if(x>=height || y>=width || x<0 || y<0)
-                return false;
+                if(x>=height || y>=width || x<0 || y<0) {
+                    return false;
+                }
+
                 return true;
         }
 

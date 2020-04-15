@@ -10,7 +10,7 @@ MSSFLMController::MSSFLMController(MinesweeperBoard &x, MSSFMLView &y) : board(x
     width=board.getBoardWidth();
 }
 void MSSFLMController::play(sf::Event &event) {
-float y=screenY/height;//80
+float y=screenY/float(height);//80
 float x=0;//0
 float a=0;//x
 float b=0;//y
@@ -21,15 +21,15 @@ for(int i=0;i<height; i++)
     a=0;
         for(int j=0; j<width; j++)
         {
-            x=x+screenX/width;
+            x=x+screenX/float(width);
             if( event.mouseButton.x <x && event.mouseButton.x>a &&  event.mouseButton.y <y && event.mouseButton.y>b)
             {
                 shapeEventReaction(i, j, x, y);
             }
-            a=a+screenX/width;
+            a=a+screenX/float(width);
         }
-            y=y+screenY/height;
-            b=b+screenY/height;
+            y=y+screenY/float(height);
+            b=b+screenY/float(height);
 }
 }
 
