@@ -1,6 +1,3 @@
-//
-// Created by Marcinek on 06.04.2020.
-//
 
 #include "MSSFMLView.h"
 #include "MinesweeperBoard.h"

@@ -4,7 +4,7 @@
 #include <string>
 #include <cstdlib>
 using namespace std;
-MSTextController::MSTextController(MinesweeperBoard &x, MSBoardTextView &y) : view(board), board(x)
+MSTextController::MSTextController(MinesweeperBoard &x, MSBoardTextView &y) :board(x), view(y)
 {
     height=board.getBoardHeight();
     width=board.getBoardWidth();

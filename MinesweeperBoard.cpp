@@ -89,7 +89,7 @@ MinesweeperBoard::MinesweeperBoard(int height,int width, GameMode mode)
 
 int MinesweeperBoard::getBoardHeight() const
 {
-    return height;
+    return height ;
 }
 
 int MinesweeperBoard::getBoardWidth() const
@@ -103,11 +103,12 @@ int MinesweeperBoard::getMineCount() const
 }
 int MinesweeperBoard::countMines(int x, int y) const
 {
-   if(BeyondSize(x,y)!=true)
+   if(BeyondSize(x,y)!=true) {
+       return -1;
+   }
+    if(!board[x][y].isRevealed) {
         return -1;
-    if(!board[x][y].isRevealed)
-        return -1;
-
+    }
         int number_of_bombs = 0;
         if(x+1<=height && board[x+1][y].hasMine)
             number_of_bombs++;
@@ -130,14 +131,18 @@ int MinesweeperBoard::countMines(int x, int y) const
 
 bool MinesweeperBoard::hasFlag(int x, int y) const
 {
-    if(BeyondSize(x,y)!=true)
+    if(BeyondSize(x,y)!=true) {
         return false;
-    if(board[x][y].isRevealed)
+    }
+    if(board[x][y].isRevealed) {
         return false;
-    if(board[x][y].hasFlag)
+    }
+    if(board[x][y].hasFlag) {
         return true;
-    if(!board[x][y].hasFlag)
+    }
+    if(!board[x][y].hasFlag) {
         return false;
+    } 
 
         return false;
 }
@@ -203,10 +208,12 @@ void MinesweeperBoard::revealField(int x, int y)
 
 bool MinesweeperBoard::isRevealed(int x, int y) const
 {
-    if(BeyondSize(x,y)!=true)
-         return false;
-    if (board[x][y].isRevealed)
+    if(BeyondSize(x,y)!=true) {
+        return false;
+    }
+    if (board[x][y].isRevealed) {
         return true;
+    }
 
         return false;
 }

@@ -1,11 +1,6 @@
-//
-// Created by ja on 09.03.2020.
-//
 
 #ifndef UNTITLED1_MINESWEEPERBOARD_H
 #define UNTITLED1_MINESWEEPERBOARD_H
-
-
 enum GameMode  {DEBUG,EASY, NORMAL, HARD };
 enum GameState { RUNNING, FINISHED_WIN, FINISHED_LOSS };
 struct field

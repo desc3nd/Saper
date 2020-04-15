@@ -1,6 +1,3 @@
-//
-// Created by Marcinek on 15.04.2020.
-//
 
 #ifndef SAPER_MSSFLMCONTROLLER_H
 #define SAPER_MSSFLMCONTROLLER_H

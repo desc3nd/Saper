@@ -11,7 +11,7 @@ class MSTextController
     int height;
     int width;
     int FlagCount;
-    void Move_Communication() ;
+    void Move_Communication();
     void Win()const;
 public:
     MSTextController(MinesweeperBoard &x, MSBoardTextView &y);

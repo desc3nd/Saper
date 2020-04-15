@@ -1,6 +1,4 @@
-//
-// Created by ja on 21.03.2020.
-//
+
 #include "MSBoardTextView.h"
 using namespace std;
 MSBoardTextView::MSBoardTextView(MinesweeperBoard &x) : board (x)

@@ -1,6 +1,3 @@
-//
-// Created by Marcinek on 06.04.2020.
-//
 
 #ifndef SAPER_MSSFMLVIEW_H
 #define SAPER_MSSFMLVIEW_H

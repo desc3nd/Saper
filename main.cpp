@@ -17,12 +17,9 @@ int main()
 {
     srand(time(NULL));
     MinesweeperBoard x(20,20, HARD);
-
     MSBoardTextView view(x);
     view.display();
-
     MSTextController ctrl(x, view);
-
     MSSFMLView SFMLView (x);
     MSSFLMController SFMLController(x,SFMLView);
     sf::RenderWindow win(sf::VideoMode(SFMLView.getScreenX(), SFMLView.getScreenY()), "Saper");
