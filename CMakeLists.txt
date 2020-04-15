@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(saper)
-
 set(CMAKE_CXX_STANDARD 14)
-add_compile_options(-Wall -Wextra)
+    add_compile_options(-Wall -Wextra)
 add_custom_target(arial.ttf)
 add_executable(saper
         Array2D.h
@@ -21,10 +20,8 @@ if (UNIX)
 endif(UNIX)
 
 if (WIN32)
-    set ( SFML_DIR "C:/cpp/SFML-2.5.1")
+# //   set( SFML_STATIC_LIBRARIES TRUE )
+    set ( SFML_DIR "C:/cpp/SFML-2.5.1/lib/cmake/SFML")
 endif(WIN32)
-
-set(SFML_PATH "C:/cpp/SFML-2.5.1" ${CMAKE_MODULE_PATH})
-set(SFML_DIR ${SFML_PATH}/lib/cmake/SFML)
 find_package(SFML 2 REQUIRED graphics window system)
 target_link_libraries(saper sfml-graphics sfml-audio)
