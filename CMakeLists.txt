@@ -13,7 +13,7 @@ add_executable(saper
         MsTextController.cpp
         MsTextController.h
         MSSFMLView.cpp
-        MSSFMLView.h)
+        MSSFMLView.h MSSFLMController.cpp MSSFLMController.h)
 # Detect and add SFML
 if (UNIX)
     set ( CMAKE_MODULES_PATH "/usr/share/SFML/cmake/Modules" ${CMAKE_MODULE_PATH})

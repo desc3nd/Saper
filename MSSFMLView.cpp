@@ -18,11 +18,11 @@ MSSFMLView::MSSFMLView(MinesweeperBoard &x) : board(x) {
            std::cerr << "błąd w czytywaniu fontu";
        }
 }
- int MSSFMLView::getScreenWidth() {
+ int MSSFMLView::getScreenX() {
     return screenX;
 }
 
- int MSSFMLView::getScreenHeight() {
+ int MSSFMLView::getScreenY() {
     return screenY;
 }
 
@@ -33,10 +33,8 @@ void MSSFMLView::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         {
             target.draw(rectangle[i][j], states);
             target.draw(text[i][j],states);
-
         }
     }
-
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             target.draw(text[i][j], states);
@@ -45,14 +43,11 @@ void MSSFMLView::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(eventTxt,states);
 }
 
-
-
 void MSSFMLView::drawRectangle() {
     float y=0;
     float x=0;
     for(int i=0; i<height; i++)
     {
-
         for(int j=0; j<width; j++)
         {
             rectangle[i][j].setPosition(x,y);
@@ -65,40 +60,11 @@ void MSSFMLView::drawRectangle() {
         y=y+screenY/height;
         x=0;
     }
-
 }
 
-void MSSFMLView::eventController(sf::Event event) {
-    float y=screenY/height;//80
-    float x=0;//0
-    float a=0;//x
-    float b=0;//y
-    for(int i=0;i<height; i++)
-    {
-        x=0;
-        a=0;
-        for(int j=0; j<width; j++)
-        {
-            x=x+screenX/width;
-            if( event.mouseButton.x <x && event.mouseButton.x>a &&  event.mouseButton.y <y && event.mouseButton.y>b)
-            {
-                cout<<"x:"<<x<<endl<<"y:"<<y<<endl<<"a:"<<a<<endl<<"B:"<<b<<endl;
-               rectangleEventReaction(i,j,event);
-                if (event.mouseButton.button == sf::Mouse::Left)
-               drawNumberOfBombs(i,j,x,y);
-            }
-            a=a+screenX/width;
-        }
-        y=y+screenY/height;
-        b=b+screenY/height;
-    }
-}
+void MSSFMLView::rectangleEventLeft(int x, int y) {
 
-void MSSFMLView::rectangleEventReaction(int x, int y,sf::Event event) {
-
-    if (event.mouseButton.button == sf::Mouse::Left)
-    {
-        board.revealField(x, y);
+    board.revealField(x, y);
         if (board.getFieldInfo(x, y) == 'x')
         {
             rectangle[x][y].setFillColor(sf::Color(100, 0, 0));
@@ -107,12 +73,12 @@ void MSSFMLView::rectangleEventReaction(int x, int y,sf::Event event) {
             eventTxt.setCharacterSize(100);
             eventTxt.setString("Game Over");
         }
-    }
     if (board.getFieldInfo(x, y) == ' ')
     {
         rectangle[x][y].setFillColor(sf::Color(0, 100,0 ));
     }
-    if (event.mouseButton.button == sf::Mouse::Right)
+}
+void MSSFMLView::rectangleEventRight(int x, int y) {
     {
         if(board.hasFlag(x,y))
             rectangle[x][y].setFillColor(sf::Color(0,0,0));
@@ -128,21 +94,21 @@ void MSSFMLView::drawNumberOfBombs(int x, int y, int ix, int iy)
 {
     char literka = board.getFieldInfo(x, y);
     int kodliterki = (int) literka;
-        for (int i = 48; i < 58; i++)
-        {
-
+    for (int i = 48; i < 58; i++)
+    {
         if (kodliterki == i)
         {
             rectangle[x][y].setFillColor(sf::Color(0, 0, 100));
 
-                text[x][y].setFont(font);
-                text[x][y].setCharacterSize(float(screenY/ higher()));
-                text[x][y].setPosition(ix-(screenX/float(width)/2), iy-(screenY/float(height)));
-                text[x][y].setString(literka);
-            }
+            text[x][y].setFont(font);
+            text[x][y].setCharacterSize(float(screenY/ higher()));
+            text[x][y].setPosition(ix-(screenX/float(width)/2), iy-(screenY/float(height)));
+            text[x][y].setString(literka);
         }
-
     }
+
+}
+
 
 int MSSFMLView::higher() {
     if(height>width)

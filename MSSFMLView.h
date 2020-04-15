@@ -5,7 +5,6 @@
 #ifndef SAPER_MSSFMLVIEW_H
 #define SAPER_MSSFMLVIEW_H
 #include<SFML/Graphics.hpp>
-#include "MSBoardTextView.h"
 #include "MinesweeperBoard.h"
 
 class MSSFMLView: public sf::Drawable {
@@ -20,14 +19,16 @@ class MSSFMLView: public sf::Drawable {
     sf::Font font;
     void drawRectangle();
     int higher();
-    void drawNumberOfBombs(int x, int y, int ix, int iy);
-    void rectangleEventReaction(int x,int y,sf::Event event);
+
+
 public:
    explicit MSSFMLView (MinesweeperBoard &x);
-    void draw(sf::RenderTarget& target,sf::RenderStates states) const;
-    int getScreenWidth();
-    int getScreenHeight();
-    void eventController(sf::Event event);
+    void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
+    int getScreenX();
+    int getScreenY();
+    void rectangleEventLeft(int x,int y);
+    void rectangleEventRight(int x,int y);
+    void drawNumberOfBombs(int x, int y, int ix, int iy);
 };
 
 

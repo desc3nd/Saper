@@ -11,21 +11,21 @@ using namespace std;
 #include "MsTextController.h"
 #include<SFML/Graphics.hpp>
 #include "MSSFMLView.h"
+#include "MSSFLMController.h"
 
 int main()
 {
     srand(time(NULL));
-    MinesweeperBoard x(10,10, HARD);
+    MinesweeperBoard x(20,20, HARD);
 
     MSBoardTextView view(x);
     view.display();
 
-
     MSTextController ctrl(x, view);
 
-
-    MSSFMLView SFMLcontrol (x);
-    sf::RenderWindow win(sf::VideoMode(SFMLcontrol.getScreenWidth(), SFMLcontrol.getScreenHeight()), "Saper");
+    MSSFMLView SFMLView (x);
+    MSSFLMController SFMLController(x,SFMLView);
+    sf::RenderWindow win(sf::VideoMode(SFMLView.getScreenX(), SFMLView.getScreenY()), "Saper");
     win.setVerticalSyncEnabled(true);
     sf::Font font;
     sf::Event event;
@@ -39,7 +39,7 @@ int main()
             }
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                SFMLcontrol.eventController(event);
+               SFMLController.play(event);
                 x.Debug_Display();
                 std::cout << "X:" << event.mouseButton.x << std::endl;
                 std::cout << "Y:" << event.mouseButton.y << std::endl;
@@ -47,7 +47,7 @@ int main()
 
         }
         win.clear(sf::Color::Blue);
-        win.draw(SFMLcontrol);
+        win.draw(SFMLView);
         win.display();
     }
 }
