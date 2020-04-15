@@ -1,4 +1,4 @@
-#include "MSTextController.h"
+#include "MsTextController.h"
 #include "MSBoardTextView.h"
 #include "MinesweeperBoard.h"
 #include <string>

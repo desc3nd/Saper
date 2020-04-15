@@ -4,7 +4,7 @@
 using namespace std;
 #include<iostream>
 #include "MinesweeperBoard.h"
-#include <math.h>
+#include <cmath>
 #include <cstdlib>
 
 MinesweeperBoard::MinesweeperBoard(int height,int width, GameMode mode)

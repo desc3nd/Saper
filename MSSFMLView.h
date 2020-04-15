@@ -14,21 +14,20 @@ class MSSFMLView: public sf::Drawable {
     float screenY;
     int width;
     int height;
-    sf::VertexArray linex[20];
     sf::RectangleShape rectangle[20][20];
     sf::Text text[20][20];
+    sf::Text eventTxt;
     sf::Font font;
     void drawRectangle();
     int higher();
-    void drawBoard();
     void drawNumberOfBombs(int x, int y, int ix, int iy);
-    void eventController(int x,int y,sf::Event event);
+    void rectangleEventReaction(int x,int y,sf::Event event);
 public:
    explicit MSSFMLView (MinesweeperBoard &x);
     void draw(sf::RenderTarget& target,sf::RenderStates states) const;
     int getScreenWidth();
     int getScreenHeight();
-    void GraphicController(sf::Event event);
+    void eventController(sf::Event event);
 };
 
 
