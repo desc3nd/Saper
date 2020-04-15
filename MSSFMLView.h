@@ -21,8 +21,8 @@ class MSSFMLView: public sf::Drawable {
 public:
    explicit MSSFMLView (MinesweeperBoard &x);
     void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
-    int getScreenX();
-    int getScreenY();
+    float getScreenX();
+    float getScreenY();
     void rectangleEventLeft(int x,int y);
     void rectangleEventRight(int x,int y);
     void drawNumberOfBombs(int x, int y, int ix, int iy);

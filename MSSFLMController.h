@@ -9,8 +9,8 @@ class MSSFLMController {
 
 MinesweeperBoard &board;
 MSSFMLView &view;
-int screenX;
-int screenY;
+float screenX;
+float screenY;
 int height;
 int width;
 sf::Event myEvent;

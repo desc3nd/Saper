@@ -15,11 +15,10 @@ MSSFMLView::MSSFMLView(MinesweeperBoard &x) : board(x) {
            std::cerr << "błąd w czytywaniu fontu";
        }
 }
- int MSSFMLView::getScreenX() {
+ float MSSFMLView::getScreenX() {
     return screenX;
 }
-
- int MSSFMLView::getScreenY() {
+float MSSFMLView::getScreenY() {
     return screenY;
 }
 
